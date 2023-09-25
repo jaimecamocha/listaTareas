@@ -3,12 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>LISTA DE TAREAS</title>
 </head>
 <body>
     <h1>LISTA DE TAREAS</h1>   
-    <input type="text" placeholder="Inserte tarea aquí">
-    <button type="button" class="btn btn-primary">Agregar tarea</button>
+    <input type="text" id="tareaInput" placeholder="Inserte tarea aquí">
+    <br>
+    <button type="button" id="agregarTarea" class="btn btn-primary">Agregar tarea</button>
+    <br>
     <a href="tareas.html">IR AL INICIO</a>
+    
+    <ul id="listaTareas"></ul>
+
+    <script>
+
+        function agregarTarea() {
+            var tareaInput = document.getElementById("tareaInput");
+            var tareaTexto = tareaInput.value.trim(); 
+    
+            if (tareaTexto !== "") {
+                var nuevaTarea = document.createElement("li");
+                nuevaTarea.innerHTML = tareaTexto + ' <button type="button" class="btn btn-danger" onclick="eliminarTarea(this)">Eliminar</button>';
+        
+                document.getElementById("listaTareas").appendChild(nuevaTarea);
+        
+                tareaInput.value = "";
+            }
+        }
+
+        function eliminarTarea(btn) {
+            var tareaAEliminar = btn.parentNode;
+            tareaAEliminar.parentNode.removeChild(tareaAEliminar);
+        }
+
+        document.getElementById("agregarTarea").addEventListener("click", agregarTarea);
+    </script>
 </body>
 </html>
